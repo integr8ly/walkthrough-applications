@@ -1,0 +1,11 @@
+.pure-table td {
+  border-left: 0px;
+}
+
+tr {
+  margin: 5px;
+}
+
+#fruitForm {
+  margin-bottom: 10px;
+}

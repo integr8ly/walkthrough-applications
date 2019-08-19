@@ -1,0 +1,23 @@
+{
+  "name": "fruit-app",
+  "version": "1.0.0",
+  "description": "Fruit CRUD Application",
+  "main": "server.js",
+  "repository": "https://github.com/integr8ly/walkthrough-applications",
+  "license": "MIT",
+  "scripts": {
+    "run": "node ./server.js",
+    "build": "npm run client:build",
+    "client:build": "browserify client.js -o public/client.js",
+    "image:build": "docker build -t quay.io/integreatly/fruit-crud-app . --squash",
+    "openshift:deploy": "oc process -f ./template.json | oc create -f -"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.2.0",
+    "swagger-jsdoc": "^3.4.0"
+  },
+  "devDependencies": {
+    "browserify": "^16.5.0"
+  }
+}
