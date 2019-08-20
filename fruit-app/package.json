@@ -1,6 +1,6 @@
 {
   "name": "fruit-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fruit CRUD Application",
   "main": "server.js",
   "repository": "https://github.com/integr8ly/walkthrough-applications",

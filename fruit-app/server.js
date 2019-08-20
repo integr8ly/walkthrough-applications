@@ -23,7 +23,7 @@ io.on('connection', () => {
 
 /**
  * @swagger
- * /api/fruits/{id}:
+ * /api/fruits:
  *   post:
  *     description: create a fruit
  *     consumes:
@@ -31,11 +31,6 @@ io.on('connection', () => {
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: id
- *         in: path
- *         required: true
- *         description: id of the fruit
- *         type: string
  *       - name: fruit
  *         in: body
  *         schema:
@@ -46,6 +41,11 @@ io.on('connection', () => {
  *     responses:
  *       200:
  *         description: ok
+ *         schema:
+ *           type: object
+ *           properties:
+ *             name:
+ *               type: string
  *       400:
  *         description: bad input
  */
@@ -123,6 +123,11 @@ app.get('/api/fruits/:id', (req, res) => {
  *     responses:
  *       200:
  *         description: ok
+ *         schema:
+ *           type: object
+ *           properties:
+ *             name:
+ *               type: string
  *       400:
  *         description: bad input
  *       404:
@@ -167,6 +172,11 @@ app.put('/api/fruits/:id', (req, res) => {
  *     responses:
  *       200:
  *         description: ok
+ *         schema:
+ *           type: object
+ *           properties:
+ *             name:
+ *               type: string
  *       400:
  *         description: bad input
  */

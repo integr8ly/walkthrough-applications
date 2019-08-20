@@ -39,7 +39,7 @@
             "containers": [
               {
                 "name": "crud-app",
-                "image": "quay.io/integreatly/fruit-crud-app:1.0.0",
+                "image": "quay.io/integreatly/fruit-crud-app:1.0.1",
                 "ports": [
                   {
                     "containerPort": 8080,

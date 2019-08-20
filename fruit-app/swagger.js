@@ -4,7 +4,7 @@ const options = {
   definition: {
     info: {
       title: 'Fruit CRUD Application',
-      version: '1.0.0',
+      version: '1.0.1',
       description: 'Basic CRUD application for fruit'
     },
   },
