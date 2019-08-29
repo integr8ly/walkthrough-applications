@@ -11,6 +11,9 @@ fetch('/api/fruits')
     });
   });
 
+const fruitForm = document.getElementById('fruitForm');
+fruitForm.addEventListener('submit', handleCreateFruit);
+
 function handleCreateFruit(e) {
   e.preventDefault();
 
@@ -30,8 +33,15 @@ function handleCreateFruit(e) {
   return false;
 }
 
-const fruitForm = document.getElementById('fruitForm');
-fruitForm.addEventListener('submit', handleCreateFruit);
+function refreshList(fruitList) {
+  const fruitListElem = document.getElementById('fruitList');
+  const fruitElems = fruitList.map(f => buildFruitElem(f));
+  // remove existing children
+  while (!!fruitListElem.firstChild) {
+    fruitListElem.removeChild(fruitListElem.firstChild);
+  }
+  fruitElems.forEach(e => fruitListElem.appendChild(e));
+}
 
 function buildFruitElem(fruit) {
   const fruitElem = document.createElement('tr');
@@ -53,7 +63,6 @@ function buildFruitElem(fruit) {
   fruitElem.appendChild(fruitIDElem);
   fruitElem.appendChild(fruitNameElem);
   fruitElem.appendChild(fruitActionElem);
-  console.log('build')
 
   return fruitElem;
 }
@@ -62,14 +71,4 @@ function deleteFruit(fruitID) {
   fetch(`/api/fruits/${fruitID}`, {
     method: 'DELETE'
   });
-}
-
-function refreshList(fruitList) {
-  const fruitListElem = document.getElementById('fruitList');
-  const fruitElems = fruitList.map(f => buildFruitElem(f));
-  // remove existing children
-  while (!!fruitListElem.firstChild) {
-    fruitListElem.removeChild(fruitListElem.firstChild);
-  }
-  fruitElems.forEach(e => fruitListElem.appendChild(e));
 }

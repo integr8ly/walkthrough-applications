@@ -10,7 +10,10 @@ fetch('/api/fruits')
     socket.on('fruit', (fruitList) => {
       refreshList(fruitList);
     });
-});
+  });
+
+const fruitForm = document.getElementById('fruitForm');
+fruitForm.addEventListener('submit', handleCreateFruit);
 
 function handleCreateFruit(e) {
   e.preventDefault();
@@ -31,8 +34,15 @@ function handleCreateFruit(e) {
   return false;
 }
 
-const fruitForm = document.getElementById('fruitForm');
-fruitForm.addEventListener('submit', handleCreateFruit);
+function refreshList(fruitList) {
+  const fruitListElem = document.getElementById('fruitList');
+  const fruitElems = fruitList.map(f => buildFruitElem(f));
+  // remove existing children
+  while (!!fruitListElem.firstChild) {
+    fruitListElem.removeChild(fruitListElem.firstChild);
+  }
+  fruitElems.forEach(e => fruitListElem.appendChild(e));
+}
 
 function buildFruitElem(fruit) {
   const fruitElem = document.createElement('tr');
@@ -49,12 +59,11 @@ function buildFruitElem(fruit) {
   deleteElem.className = 'fa fa-trash';
   deleteElem.style = 'font-size:25px;color:#C9190B;'
   deleteElem.onclick = deleteFruit.bind(null, fruit.id);
-fruitActionElem.appendChild(deleteElem);
+  fruitActionElem.appendChild(deleteElem);
 
   fruitElem.appendChild(fruitIDElem);
   fruitElem.appendChild(fruitNameElem);
   fruitElem.appendChild(fruitActionElem);
-  console.log('build')
 
   return fruitElem;
 }
@@ -64,17 +73,6 @@ function deleteFruit(fruitID) {
     method: 'DELETE'
   });
 }
-
-function refreshList(fruitList) {
-  const fruitListElem = document.getElementById('fruitList');
-  const fruitElems = fruitList.map(f => buildFruitElem(f));
-  // remove existing children
-  while (!!fruitListElem.firstChild) {
-    fruitListElem.removeChild(fruitListElem.firstChild);
-  }
-  fruitElems.forEach(e => fruitListElem.appendChild(e));
-}
-
 },{"socket.io-client":36}],2:[function(require,module,exports){
 module.exports = after
 
