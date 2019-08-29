@@ -9,7 +9,7 @@ Very basic CRUD application for fruit
 
 When `client.js` has been modified, run `npm run client:build`
 
-Application is then accessible on http://localhost:8080/ if process.env.PORT is undefined.
+Application is then accessible on http://localhost:8080/ if `process.env.PORT` is undefined.
 
 ## Building and Running Application in Docker locally
 
