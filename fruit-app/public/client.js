@@ -10,7 +10,10 @@ fetch('/api/fruits')
     socket.on('fruit', (fruitList) => {
       refreshList(fruitList);
     });
-});
+  });
+
+const fruitForm = document.getElementById('fruitForm');
+fruitForm.addEventListener('submit', handleCreateFruit);
 
 function handleCreateFruit(e) {
   e.preventDefault();
@@ -31,20 +34,32 @@ function handleCreateFruit(e) {
   return false;
 }
 
-const fruitForm = document.getElementById('fruitForm');
-fruitForm.addEventListener('submit', handleCreateFruit);
+function refreshList(fruitList) {
+  const fruitListElem = document.getElementById('fruitList');
+  const fruitElems = fruitList.map(f => buildFruitElem(f));
+  // remove existing children
+  while (!!fruitListElem.firstChild) {
+    fruitListElem.removeChild(fruitListElem.firstChild);
+  }
+  fruitElems.forEach(e => fruitListElem.appendChild(e));
+}
 
 function buildFruitElem(fruit) {
   const fruitElem = document.createElement('tr');
   const fruitIDElem = document.createElement('td');
+  fruitIDElem.setAttribute('data-label', 'ID');
   fruitIDElem.textContent = fruit.id;
   const fruitNameElem = document.createElement('td');
+  fruitNameElem.setAttribute('data-label', 'Name');
   fruitNameElem.textContent = fruit.name;
-  const fruitActionElem = document.createElement('button');
-  fruitActionElem.className = 'pure-button';
-  fruitActionElem.style = 'margin: 5px;'
-  fruitActionElem.textContent = 'Delete';
-  fruitActionElem.onclick = deleteFruit.bind(null, fruit.id);
+
+  const fruitActionElem = document.createElement('td');
+  fruitActionElem.setAttribute('data-label', 'Actions');
+  deleteElem = document.createElement('i');
+  deleteElem.className = 'fa fa-trash';
+  deleteElem.style = 'font-size:25px;color:#C9190B;'
+  deleteElem.onclick = deleteFruit.bind(null, fruit.id);
+  fruitActionElem.appendChild(deleteElem);
 
   fruitElem.appendChild(fruitIDElem);
   fruitElem.appendChild(fruitNameElem);
@@ -58,17 +73,6 @@ function deleteFruit(fruitID) {
     method: 'DELETE'
   });
 }
-
-function refreshList(fruitList) {
-  const fruitListElem = document.getElementById('fruitList');
-  const fruitElems = fruitList.map(f => buildFruitElem(f));
-  // remove existing children
-  while (!!fruitListElem.firstChild) {
-    fruitListElem.removeChild(fruitListElem.firstChild);
-  }
-  fruitElems.forEach(e => fruitListElem.appendChild(e));
-}
-
 },{"socket.io-client":36}],2:[function(require,module,exports){
 module.exports = after
 

@@ -1,6 +1,6 @@
 {
   "name": "fruit-app",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Fruit CRUD Application",
   "main": "server.js",
   "repository": "https://github.com/integr8ly/walkthrough-applications",
@@ -13,6 +13,7 @@
     "openshift:deploy": "oc process -f ./template.json | oc create -f -"
   },
   "dependencies": {
+    "@patternfly/patternfly": "^2.27.1",
     "express": "^4.17.1",
     "socket.io": "^2.2.0",
     "swagger-jsdoc": "^3.4.0"
